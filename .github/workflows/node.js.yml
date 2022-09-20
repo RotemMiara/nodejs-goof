@@ -32,7 +32,7 @@ jobs:
       - name: Installing snyk-delta and dependencies
         run: npm i -g snyk-delta
       - uses: snyk/actions/setup@master
-      - run: snyk test --json --print-deps | jq '.vulnerabilities[] | select(.severity=="critical") | snyk-delta
+      - run: snyk test --json --print-deps | jq '.vulnerabilities[] | select(.severity=="critical")' | snyk-delta
 
       
 
