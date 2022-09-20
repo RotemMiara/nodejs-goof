@@ -32,8 +32,12 @@ jobs:
       - name: Installing snyk-delta and dependencies
         run: npm i -g snyk-delta
       - uses: snyk/actions/setup@master
-      - run: snyk test --json | jq 'del(.vulnerabilities[]? | select(.severity=="low" or .severity=="medium" or .severity=="high"))' | snyk-delta --setPassIfNoBaseline="true" 
-
+      - run: |
+          set +e
+          snyk test --json | jq 'del(.vulnerabilities[]? | select(.severity=="low" or .severity=="medium" or .severity=="high"))' | snyk-delta --setPassIfNoBaseline="true" 
+          RESULT=$?
+          snyk-to-html -i code_results.json -o snyk_code_results.html
+          if [ "$RESULT" == 1 ]; then exit $RESULT; fi
       
 
      # - name: install snyk-to-html
