@@ -29,7 +29,6 @@ jobs:
       - run: npm install
       - run: npm i -g snyk
       - run: snyk auth ${{ secrets.SNYK_TOKEN }}
-      - run: snyk monitor
       - name: Installing snyk-delta and dependencies
         run: npm i -g snyk-delta
       - run: snyk test --json --severity-threshold=critical | snyk-delta -d --baselineOrg=rotem.miara
