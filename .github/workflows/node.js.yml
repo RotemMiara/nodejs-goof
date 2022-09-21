@@ -32,9 +32,9 @@ jobs:
       - name: Installing snyk-delta and dependencies
         run: npm i -g snyk-delta
       - run: | 
-          NUMBEROFISSUES=$(snyk test . --severity-threshold=critical --json | jq .uniqueCount);
-          if [[ ${NUMBEROFISSUES} -gt 0 ]]; 
-          then echo "${NUMBEROFISSUES} critical issues" && exit 1; 
+          VULNNUM=$(snyk test . --severity-threshold=critical --json | jq .uniqueCount | snyk-delta);
+          if [[ ${VULNNUM} -gt 0 ]]; 
+          then echo "${VULNNUM} critical issues" && exit 1; 
           fi
 
       
