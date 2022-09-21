@@ -32,7 +32,8 @@ jobs:
       - name: Installing snyk-delta and dependencies
         run: npm i -g snyk-delta
       - uses: snyk/actions/setup@master
-      - run: snyk test --severity-threshold=critical
+      - run: snyk test --json | jq 'del(.vulnerabilities[]? | select(.severity=="low" or .severity=="medium" or .severity=="high"))' | snyk-delta --baselineOrg=rotem.miara 
+
 
       
 
