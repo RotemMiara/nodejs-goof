@@ -32,8 +32,8 @@ jobs:
       - name: Installing snyk-delta and dependencies
         run: npm i -g snyk-delta
       - uses: snyk/actions/setup@master
-      - run: |
-          snyk test 
+      - run: snyk test --severity-threshold=critical
+
       
 
      # - name: install snyk-to-html
