@@ -33,7 +33,7 @@ jobs:
         run: npm i -g snyk-delta
       - run: | 
           NUMBEROFISSUES=$(snyk test . --severity-threshold=critical --json | jq .uniqueCount);
-          if [[ ${NUMBEROFISSUES} -gt 10 ]]; 
+          if [[ ${NUMBEROFISSUES} -gt 0 ]]; 
           then echo "${NUMBEROFISSUES} critical issues" && exit 1; 
           fi
 
